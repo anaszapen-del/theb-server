@@ -1,0 +1,66 @@
+app:
+  name: THEB
+  env: production
+  port: 8080
+  host: 0.0.0.0
+  debug: false
+
+database:
+  host: ${DB_HOST}
+  port: 5432
+  user: ${DB_USER}
+  password: ${DB_PASSWORD}
+  name: theb_db
+  sslmode: require
+  timezone: Asia/Amman
+  max_open_conns: 100
+  max_idle_conns: 10
+  conn_max_lifetime: 10m
+
+redis:
+  host: ${REDIS_HOST}
+  port: 6379
+  password: ${REDIS_PASSWORD}
+  db: 0
+  pool_size: 50
+
+jwt:
+  secret: ${JWT_SECRET}
+  access_token_expiry: 15m
+  refresh_token_expiry: 168h
+
+otp:
+  expiry: 5m
+  length: 6
+
+google_maps:
+  api_key: ${GOOGLE_MAPS_API_KEY}
+
+expo_push:
+  token: ${EXPO_PUSH_TOKEN}
+
+cors:
+  allowed_origins:
+    - https://theb.app
+    - https://admin.theb.app
+  allowed_methods:
+    - GET
+    - POST
+    - PUT
+    - PATCH
+    - DELETE
+    - OPTIONS
+  allowed_headers:
+    - Origin
+    - Content-Type
+    - Authorization
+  allow_credentials: true
+
+rate_limit:
+  per_minute: 60
+  otp_per_hour: 3
+
+logging:
+  level: info
+  format: json
+  output: stdout

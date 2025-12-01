@@ -1,0 +1,66 @@
+app:
+  name: THEB
+  env: development
+  port: 8080
+  host: 0.0.0.0
+  debug: true
+
+database:
+  host: localhost
+  port: 5432
+  user: postgres
+  password: "00962"
+  name: theb_db
+  sslmode: disable
+  timezone: Asia/Amman
+  max_open_conns: 25
+  max_idle_conns: 5
+  conn_max_lifetime: 5m
+
+redis:
+  host: localhost
+  port: 6379
+  password: ""
+  db: 0
+  pool_size: 10
+
+jwt:
+  secret: dev-jwt-secret-change-in-production
+  access_token_expiry: 15m
+  refresh_token_expiry: 168h
+
+otp:
+  expiry: 5m
+  length: 6
+
+google_maps:
+  api_key: ""
+
+expo_push:
+  token: ""
+
+cors:
+  allowed_origins:
+    - http://localhost:3000
+    - http://localhost:8081
+  allowed_methods:
+    - GET
+    - POST
+    - PUT
+    - PATCH
+    - DELETE
+    - OPTIONS
+  allowed_headers:
+    - Origin
+    - Content-Type
+    - Authorization
+  allow_credentials: true
+
+rate_limit:
+  per_minute: 100
+  otp_per_hour: 5
+
+logging:
+  level: debug
+  format: json
+  output: stdout
