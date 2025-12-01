@@ -4,6 +4,7 @@ import (
 	"theb-backend/internal/config"
 	"theb-backend/internal/container"
 	"theb-backend/internal/router"
+	"theb-backend/internal/service/auth"
 
 	"github.com/gin-gonic/gin"
 	"github.com/go-redis/redis/v8"
@@ -54,9 +55,13 @@ func (a *Application) Router() *gin.Engine {
 
 // registerServices registers all service dependencies
 func registerServices(ctn *container.Container) error {
-	// TODO: Register service modules here
+	// Register auth service
+	if err := auth.RegisterService(ctn); err != nil {
+		return err
+	}
+
+	// TODO: Register other service modules here
 	// Example:
-	// auth.RegisterService(ctn)
 	// user.RegisterService(ctn)
 	// location.RegisterService(ctn)
 	// order.RegisterService(ctn)

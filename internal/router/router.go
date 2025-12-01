@@ -6,6 +6,7 @@ import (
 	"theb-backend/internal/config"
 	"theb-backend/internal/container"
 	"theb-backend/internal/middleware"
+	"theb-backend/internal/service/auth"
 
 	"github.com/gin-gonic/gin"
 )
@@ -32,15 +33,20 @@ func New(cfg *config.Config, ctn *container.Container) *gin.Engine {
 	// API v1 routes
 	v1 := router.Group("/api/v1")
 	{
-		// TODO: Register service routes here
+		// Register auth routes
+		if err := auth.RegisterRoutes(v1, ctn); err != nil {
+			panic(err)
+		}
+
+		// TODO: Register other service routes here
 		// Example:
-		// auth := v1.Group("/auth")
-		// {
-		//     authHandler := getAuthHandler(ctn)
-		//     auth.POST("/login", authHandler.Login)
-		//     auth.POST("/verify", authHandler.Verify)
-		//     auth.POST("/refresh", authHandler.Refresh)
-		// }
+		// user.RegisterRoutes(v1, ctn)
+		// location.RegisterRoutes(v1, ctn)
+		// order.RegisterRoutes(v1, ctn)
+		// payment.RegisterRoutes(v1, ctn)
+		// rating.RegisterRoutes(v1, ctn)
+		// notification.RegisterRoutes(v1, ctn)
+		// captain.RegisterRoutes(v1, ctn)
 
 		v1.GET("/ping", func(c *gin.Context) {
 			c.JSON(http.StatusOK, gin.H{"message": "pong"})
